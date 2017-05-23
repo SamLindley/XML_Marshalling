@@ -1,0 +1,21 @@
+<shiporder orderid="123">
+    <orderperson>A new name!</orderperson>
+    <shipto>
+        <name>A new name!</name>
+        <address>Bacon</address>
+        <city>A new city!</city>
+        <country>Bacon Country</country>
+    </shipto>
+    <item>
+        <title>Hello</title>
+        <note>Hello</note>
+        <quantity>500</quantity>
+        <price>200.50</price>
+    </item>
+    <item>
+        <title>Hello Again</title>
+        <note>Number 2!</note>
+        <quantity>200</quantity>
+        <price>200.50</price>
+    </item>
+</shiporder>
