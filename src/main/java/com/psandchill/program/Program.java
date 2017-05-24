@@ -1,8 +1,11 @@
 package com.psandchill.program;
 
-import com.psandchill.factory.ObjectFactory;
+import com.psandchill.services.ConsolePrinter;
+import com.psandchill.services.ObjectFactory;
 import com.psandchill.model.OrderList;
 import com.psandchill.model.Shiporder;
+import com.psandchill.services.XMLPrinter;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -15,55 +18,20 @@ import java.util.ArrayList;
 public class Program {
 
     private ObjectFactory orderFactory = new ObjectFactory();
+    private XMLPrinter printer = new ConsolePrinter();
 
     public void run() {
         ArrayList<Shiporder> orders = createSomeOrders();
-        printOrdersAsXML(orders);
-        printAPrettyLine();
-        printXMLFileAsString("shiporder.xml");
-    }
-
-    private void printAPrettyLine() {
-        System.out.println();
-        System.out.println("--------------------------------------------------------------------------");
-    }
-
-    private void printXMLFileAsString(String file) {
-        try {
-            JAXBContext jaxbContext = JAXBContext.newInstance(Shiporder.class);
-            Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-            Shiporder shiporder = (Shiporder) unmarshaller.unmarshal(new File(file));
-            printOrderInfo(shiporder);
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    private void printOrderInfo(Shiporder shiporder) {
-        System.out.printf("\nDetails of order: \nName: %s\nCity: %s\n",
-                shiporder.getOrderperson(), shiporder.getShipto().getCity());
-    }
-
-    private void printOrdersAsXML(ArrayList<Shiporder> orders) {
-        try {
-            OrderList wrappedOrders = new OrderList();
-            wrappedOrders.setShiporders(orders);
-            JAXBContext jaxbContext = JAXBContext.newInstance(OrderList.class);
-            Marshaller marshaller = jaxbContext.createMarshaller();
-            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-
-            marshaller.marshal(wrappedOrders, System.out);
-
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        }
-
+        printer.printOrdersAsXML(orders);
+        printer.printSomeKindOfSpace();
+        printer.printXMLFileAsString("shiporder.xml");
     }
 
     private ArrayList<Shiporder> createSomeOrders() {
         Shiporder shiporder1 = orderFactory.createShiporder();
         Shiporder shiporder2 = orderFactory.createShiporder();
+
+
 
         shiporder1.setOrderid("1");
         shiporder1.setOrderperson("Sam");
@@ -112,5 +80,21 @@ public class Program {
         return list;
     }
 
+
+    private void createSomeOrdersV2(){
+        Shiporder shiporder3 = orderFactory.createShiporder();
+
+        shiporder3.setShipto(orderFactory.createShiporderShipto());
+        shiporder3.getShipto().setCountry("Happy");
+        shiporder3.getShipto().setAddress("Happy");
+        shiporder3.getShipto().setCity("Happy");
+        shiporder3.getShipto().setName("Happy");
+
+        shiporder3.getItem().add(orderFactory.createShiporderItem());
+        shiporder3.getItem().get(0).setTitle("Item 1");
+        shiporder3.getItem().get(0).setQuantity(new BigInteger("10"));
+        shiporder3.getItem().get(0).setPrice(new BigDecimal(99.99));
+
+    }
 
 }

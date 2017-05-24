@@ -6,7 +6,7 @@
 //
 
 
-package com.psandchill.factory;
+package com.psandchill.services;
 
 import com.psandchill.model.Shiporder;
 
@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlRegistry;
 
 
 /**
- * This object contains factory methods for each 
+ * This object contains services methods for each
  * Java content interface and Java element interface 
  * generated in the com.psandchill.model package. 
  * <p>An ObjectFactory allows you to programatically 
