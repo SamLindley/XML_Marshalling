@@ -33,7 +33,8 @@ public class XMLService {
                 System.out.println("No file specified as location to marshal to.\nPrinting XML output of - "
                         + orders.toString() + " - to console:\n");
                 marshaller.marshal(orders, System.out);
-            }
+            }else
+                marshaller.marshal(orders, location);
 
 
         } catch (JAXBException e) {

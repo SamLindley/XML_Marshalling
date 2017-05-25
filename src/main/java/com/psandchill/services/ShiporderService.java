@@ -8,7 +8,7 @@ import java.math.BigInteger;
 
 public class ShiporderService {
 
-    private ObjectFactory orderFactory = new ObjectFactory();
+    private final ObjectFactory orderFactory = new ObjectFactory();
 
     public ShiporderList generateSomeOrders(){
         Shiporder shiporder1 = orderFactory.createShiporder();

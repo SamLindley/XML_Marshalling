@@ -5,6 +5,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /*
@@ -43,9 +44,6 @@ public class ShiporderList {
     }
 
     public void addShiporders(Shiporder... shiporders) {
-        for (Shiporder order :
-                shiporders) {
-            this.shiporders.add(order);
-        }
+        Collections.addAll(this.shiporders, shiporders);
     }
 }

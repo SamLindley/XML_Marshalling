@@ -7,8 +7,8 @@ import com.psandchill.services.XMLService;
 
 public class Program {
 
-    private XMLService xmlService = new XMLService();
-    private ShiporderService shiporderService = new ShiporderService();
+    private final XMLService xmlService = new XMLService();
+    private final ShiporderService shiporderService = new ShiporderService();
 
     public void run() {
 
