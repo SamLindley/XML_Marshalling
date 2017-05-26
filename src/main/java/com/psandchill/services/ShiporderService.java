@@ -3,17 +3,46 @@ package com.psandchill.services;
 import com.psandchill.model.ShiporderList;
 import com.psandchill.model.Shiporder;
 
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import java.io.File;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
 public class ShiporderService {
 
     private final ObjectFactory orderFactory = new ObjectFactory();
+    private final XMLService xmlService = new XMLService();
 
-    public ShiporderList generateSomeOrders(){
+    public Shiporder unmarshalOrderFromXML(String file) {
+
+        Unmarshaller unmarshaller = xmlService.getUnmarshaller(Shiporder.class);
+        try {
+
+            return (Shiporder) unmarshaller.unmarshal(new File(file));
+
+        } catch (JAXBException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public void marshalOrdersToXML(ShiporderList orders) {
+
+        Marshaller marshaller = xmlService.getFormattedMarshaller(ShiporderList.class);
+        try {
+            marshaller.marshal(orders, System.out);
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    public ShiporderList generateSomeOrders() {
         Shiporder shiporder1 = orderFactory.createShiporder();
         Shiporder shiporder2 = orderFactory.createShiporder();
-
 
 
         shiporder1.setOrderid("1");
@@ -62,12 +91,14 @@ public class ShiporderService {
         return orderList;
     }
 
-    public void printItemsToConsole(Shiporder shiporder){
+    public void printItemsToConsole(Shiporder shiporder) {
         int i = 1;
         for (Shiporder.Item item :
                 shiporder.getItem()) {
             System.out.printf("Item %s: %s\n", i++, item.getTitle());
         }
     }
+
+
 
 }
