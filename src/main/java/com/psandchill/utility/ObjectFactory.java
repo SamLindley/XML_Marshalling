@@ -6,7 +6,7 @@
 //
 
 
-package com.psandchill.services;
+package com.psandchill.utility;
 
 import com.psandchill.model.Shiporder;
 

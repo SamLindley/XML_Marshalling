@@ -1,11 +1,11 @@
-package com.psandchill.services;
+package com.psandchill.utility;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-public class XMLService {
+public class XMLUtility {
 
     private JAXBContext jaxbContext;
 
