@@ -32,7 +32,7 @@ public class ShiporderXMLService implements ShiporderService {
     }
 
     @Override
-    public void persistOrder(ShiporderList orders) {
+    public void persistOrders(ShiporderList orders) {
 
         Marshaller marshaller = xmlUtility.getFormattedMarshaller(ShiporderList.class);
         try {
@@ -93,14 +93,8 @@ public class ShiporderXMLService implements ShiporderService {
         return orderList;
     }
 
-    @Override
-    public void printItemsToConsole(Shiporder shiporder) {
-        int i = 1;
-        for (Shiporder.Item item :
-                shiporder.getItem()) {
-            System.out.printf("Item %s: %s\n", i++, item.getTitle());
-        }
-    }
+
+
 
 
 

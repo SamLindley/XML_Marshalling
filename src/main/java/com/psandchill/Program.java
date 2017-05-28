@@ -15,13 +15,21 @@ public class Program {
         ShiporderList orders = shiporderXMLService.generateTestOrders();
 
         //Marshal them to XML
-        shiporderXMLService.persistOrder(orders);
+        shiporderXMLService.persistOrders(orders);
 
         //Unmarshal Shiporder object from XML
         Shiporder newOrder = shiporderXMLService.getOrder("shiporder.xml");
 
         //Print confirmation
-        shiporderXMLService.printItemsToConsole(newOrder);
+        printItemsToConsole(newOrder);
+    }
+
+    public void printItemsToConsole(Shiporder shiporder) {
+        int i = 1;
+        for (Shiporder.Item item :
+                shiporder.getItem()) {
+            System.out.printf("Item %s: %s\n", i++, item.getTitle());
+        }
     }
 
 }
